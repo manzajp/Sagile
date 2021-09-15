@@ -56,6 +56,8 @@
       <th>End Date</th>
       <th>Task Assign To</th>
       <th>Edit</th>
+      <th>View</th>
+      <th>Burndown Chart</th>
   </tr>
   
   @foreach($sprints as $sprint)
@@ -90,6 +92,9 @@
 
       <th>
           <a href="{{action('ProductFeatureController@index3', $sprint['sprint_id'])}}">View</a>
+      </th>
+      <th>
+        <a href="{{route('chart.index', [$sprint->sprint_name, $sprint->start_sprint, $sprint->end_sprint])}}">Show</a>
       </th>
     </tr>
   
