@@ -151,7 +151,7 @@ ul {
                     <li class="aside a"><a href="{{route('team.index')}}">Team</a></li>
                     <li class="aside a"><a href="{{route('status.index')}}">Status</a></li>
                     <li class="aside a"><a href="{{route('tasks.index')}}">Kanban Board</a><li>
-                    <li class="aside a"><a href="{{route('chart.index')}}">Burn Down Chart</a><li>
+                    {{-- <li class="aside a"><a href="{{route('chart.index')}}">Burn Down Chart</a><li> --}}
                     <li class="aside a"><a href="{{route('perfeature.index')}}">Performance Feature</a></li>
                     <li class="aside a"><a href="{{route('secfeature.index')}}">Security Feature</a></li>
                     {{--  <li class="aside a"><a href="{{route('deffeature.index')}}">Defect Feature</a></li> --}}
