@@ -59,8 +59,10 @@
             <th>Status</th>
             <th>Performance</th>
             <th>Security</th>
+            <th>Tasks</th>
             <th>Edit</th> 
             <th>Delete</th>
+            
         </tr>
       @if(count($userstories) )
       @foreach($userstories as $userstory)
@@ -93,7 +95,11 @@
               {{ $userstory->secfeature_id }}
             </th>
       
-        
+            <th>
+              <a href="{{route('tasks.index')}}">
+                View
+            </th>
+
             <th>
               <a href="{{route('userstory.edit', [$userstory->u_id])}}">
                   Edit
