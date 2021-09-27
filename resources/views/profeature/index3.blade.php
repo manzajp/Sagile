@@ -1,120 +1,128 @@
-@extends('layouts.app2')
-<style>
-        table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-        }
-        
-        td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
-        }
-        
-        tr:nth-child(even) {
-          background-color: #dddddd;
-        }
+<?php
 
-        .button {
-         background-color: #4CAF50; /* Green */
-         border: none;
-         color: white;
-         padding: 15px 32px;
-         text-align: center;
-         text-decoration: none;
-         display: inline-block;
-         font-size: 16px;
-        }
-</style>
+namespace App\Http\Controllers;
+use App\Project;
+use App\Sprint;
+use App\User;
+use App\UserStory;
+use App\ProductFeature;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Auth;
 
-@section('dashboard')
+class ProductFeatureController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(User $id, Project $project)
+    {
 
-@foreach($projects as $project)
-        <li>
-            <a href="{{ route('projects.edit', [$project]) }}">
-             {{ $project->proj_name }} 
-            </a>
-                     
-        </li>
-@endforeach
-        
-@if($projects->isEmpty())
-     No project.
-@endif
-@endsection
-
-@section('content')
-<br><br>
-    <a href="{{route('profeature.index')}}" class="button">Project List</a>
-
-
-    @csrf
-    <table id=userstories>
-        <tr>
-            <th>ID</th>
-            <th>User Stories</th>
-            <th>Description</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>Performance</th>
-            <th>Security</th>
-            <th>Tasks</th>
-            <th>Edit</th> 
-            <th>Delete</th>
+        $project = new Project();
+        if (\Auth::check())
+        {
+            $id = \Auth::user()->getId();
             
-        </tr>
-      @if(count($userstories) )
-      @foreach($userstories as $userstory)
-        <tr> 
-            <th>
-              {{ $userstory->u_id }}
-            </th>
+        }
+        if($id)
+        {
+            $pro = \App\Project::where('user_id', '=', $id)->get();     
+            return view('profeature.index',['projects'=>$project->all(), 'pros'=>$pro->all()]);
+
+            // $project =\App\Project::where('proj_name', '=', "$proj_name")->get();
+            // return view('profeature.index',['projects'=>$project]);
+        }
+        return view('project.index',['projects'=>$project->all(), 'pros'=>$pro->all()]);
+            
+    }
+
+    public function index2($proj_name)
+    {
+        $project = new Project();
+        $sprint = Sprint::where('proj_name', '=', "$proj_name")->get();
+        return view('profeature.index2',['sprints'=>$sprint, 'projects'=>$project->all()]);
+    }
+
+    public function index3($sprint_id)
+    {
+        $project = new Project();
+        $create = new UserStory();
+        $sprint = new Sprint();
+        $usersprint = new userStory();
         
-            <th>
-              {{$userstory->user_story}}
-            </th>
+        $userstory = \App\UserStory::where('sprint_id', '=', $sprint_id)->get();
+        //dd($userstory);
+        return view('profeature.index3',['create'=>$create, 'sprint'=>$sprint, 'usersprint'=>$usersprint,'userstories'=>$userstory, 'projects'=>$project->all()])->with('sprint_id', $sprint_id);
         
-            <th>
-              {{ $userstory->desc_story }}
-            </th>
-        
-            <th>
-              {{ $userstory->prio_story }}
-            </th>
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('project.create');
+    }
 
-            <th>
-              {{ $userstory->title }}
-            </th>
+    public function edit2()
+    {
+        $project = new Project;
+        $status = new Status;
+        return view('userstory.edit',['statuses'=>$status->all(),'userstory'=>$userStory, 'projects'=>$project->all()]);
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
-            <th>
-              {{ $userstory->perfeature_id }}
-            </th>
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\ProductFeature  $productFeature
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ProductFeature $productFeature)
+    {
+        //
+    }
 
-            <th>
-              {{ $userstory->secfeature_id }}
-            </th>
-      
-            <th>
-              <a href="{{route('tasks.index')}}">
-                View
-            </th>
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\ProductFeature  $productFeature
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ProductFeature $productFeature)
+    {
+        //
+    }
 
-            <th>
-              <a href="{{route('userstory.edit', [$userstory->u_id])}}">
-                  Edit
-              </a>
-            </th>
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\ProductFeature  $productFeature
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, ProductFeature $productFeature)
+    {
+        //
+    }
 
-            <th>
-                <button type="submit"><a href="{{route('userstory.destroy', $userstory)}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this userstory?');">Delete</button>
-            </th>
-        </tr>
-        @endforeach
-      @endif
-      </table>
-        <br><br><br>
-          <button type="submit"><a href="{{route('userstory.create')}}">Create User Story</a></button>
-       
-      
-@endsection
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\ProductFeature  $productFeature
+     * @return \Illuminate\Http\Response
+     */
+
+}
