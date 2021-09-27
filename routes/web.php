@@ -51,7 +51,7 @@ Route::get('profeature/{profeature}/edit', 'ProductFeatureController@edit')->nam
 Route::get('sprint/{sprint_id}/edit2', 'ProductFeatureController@edit2')->name('profeature.edit2');
 
 //Route for chart
-Route::get('chart', 'ChartController@index')->name('chart.index');
+Route::get('chart/{sprint_id}', 'ChartController@index')->name('chart.index');
 
 //Route for team
 Route::get('team', 'TeamController@index')->name('team.index');
