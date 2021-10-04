@@ -17,6 +17,7 @@ class CreateUserStoriesTable extends Migration
             $table->bigIncrements('u_id');
             $table->string('user_story');
             $table->string('desc_story');
+            $table->string('due_day');
             $table->string('prio_story');
             $table->string('status_title');
             $table->timestamps();
