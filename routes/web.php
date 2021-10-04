@@ -166,6 +166,7 @@ Route::post('backlogs/{backlog}/destroy', 'BacklogController@destroy')->name('ba
 
 //Route for Task Assign
 Route::get('sprint/task', 'TaskController@index')->name('tasks.index');
+Route::get('task/{u_id}', 'TaskController@index2')->name('tasks.index2');
 Route::get('sprint/task/create', 'TaskController@create')->name('tasks.create');
 
 //Route for security feature
