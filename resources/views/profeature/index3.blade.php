@@ -101,9 +101,12 @@
             </th>
       
             <th>
-              <a href="{{route('tasks.index')}}">
+              <a href="{{action('TaskController@index2', $userstory['u_id'])}}">
                 View
             </th>
+            <!--{{action('TaskController@index2', $userstory['u_id'])}} 
+                {{route('tasks.index')}}
+            -->
 
             <th>
               <a href="{{route('userstory.edit', [$userstory->u_id])}}">
