@@ -57,8 +57,12 @@
             <th>ID</th>
             <th>Title</th>
             <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
             <th>Order</th>
             <th>Status ID</th>   
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
       @if(count($tasks) )
       @foreach($tasks as $task)
@@ -76,6 +80,14 @@
             </th>
 
             <th>
+              {{ $task->start_date }}
+            </th>
+
+            <th>
+              {{ $task->end_date }}
+            </th>
+
+            <th>
               {{ $task->order }}
             </th>
         
@@ -83,10 +95,25 @@
               {{ $task->status_id }}
             </th>
 
+            <th>
+            <a href="{{route('tasks.create')}}">
+            Edit
+            </a>
+            </th>
+
+            <th>
+            <button type="submit"><a href="{{route('tasks.create')}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task?');">Delete</button>
+            </th>
+
         </tr>
         @endforeach
       @endif
+
+          
       </table>
-       
+
+  <br><br><br>
+
+      <button type="submit"><a href="{{route('tasks.create')}}">Add Task</a></button>
       
 @endsection
