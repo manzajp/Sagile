@@ -15,6 +15,8 @@ class CreateTasksTable extends Migration
             $table->smallInteger('order')->default(0);
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('status_id');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }
