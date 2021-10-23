@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -185,7 +186,7 @@ Route::post('perfeatures', 'PerformanceFeatureController@store')->name('perfeatu
 Route::post('perfeatures/{perfeature}', 'PerformanceFeatureController@update')->name('perfeature.update');
 Route::get('perfeatures/{perfeature}/destroy', 'PerformanceFeatureController@destroy')->name('perfeature.destroy');
 
-
+Route::get('/send-email',[MailController::class,'sendEmail']);
 
 //Route for delete Mapping
 Route::post('mapping/destroy', 'MappingController@destroy')->name('mapping.destroy');
