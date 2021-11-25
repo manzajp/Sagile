@@ -11,10 +11,18 @@ class MailController extends Controller
     public function sendEmail(){
         $details = [
             'title' => 'Mail from SAgile',
-            'body' => 'This is for testing mail using gmail'
+            'body' => 'This is for test mail using Gmail'
         ];
 
         Mail::to("helpdesk.sagile@gmail.com")->send(new SagileMail($details));
-        return "Email Sent";
+    }
+
+    public function sendLoginConfirm(String $email){
+        $details = [
+            'title' => 'Login Notification',
+            'body' => 'Your account has logged into the system. Let us know if this is not you!'
+        ];
+
+        Mail::to($email)->send(new SagileMail($details));
     }
 }

@@ -30,6 +30,6 @@ class SagileMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test Mail from SAGILE')->view('emails.TestMail');
+        return $this->subject('Mail from SAGILE')->view('emails.TestMail');
     }
 }
